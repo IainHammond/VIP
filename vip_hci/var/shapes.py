@@ -22,7 +22,7 @@ __all__ = ['dist',
 
 import numpy as np
 from skimage.draw import polygon
-from skimage.draw import circle
+from skimage.draw import disk
 from sklearn.preprocessing import scale
 
 from ..conf.utils_conf import frame_or_shape
@@ -59,7 +59,7 @@ def mask_circle(array, radius, fillwith=0, mode='in'):
     cy, cx = frame_center(array)
 
     shape = (array.shape[-2],array.shape[-1])
-    ind = circle(cy, cx, radius, shape=shape)
+    ind = disk((cy, cx), radius, shape=shape)
 
     if mode == 'in':
         array_masked = array.copy()
@@ -117,7 +117,7 @@ def create_ringed_spider_mask(im_shape, ann_out, ann_in=0, sp_width=10,
     theta = np.arctan2(sp_width/2, r)
 
     cy, cx = frame_center(mask)
-    rr0, cc0 = circle(cy, cx, min(ann_out, cy))
+    rr0, cc0 = disk((cy, cx), min(ann_out, cy))
     mask[rr0, cc0] = 1
 
     t0 = np.array([theta, np.pi-theta, np.pi+theta, np.pi*2 - theta])
@@ -135,7 +135,7 @@ def create_ringed_spider_mask(im_shape, ann_out, ann_in=0, sp_width=10,
         yn[i] = r * np.sin(tn[i]) + s[0]/2
         rrn, ccn = polygon(yn[i], xn[i])
         mask[rrn, ccn] = 0
-    rr4, cc4 = circle(cy, cx, ann_in)
+    rr4, cc4 = disk((cy, cx), ann_in)
     mask[rr4, cc4] = 0
     
     return mask
