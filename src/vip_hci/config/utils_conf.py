@@ -143,7 +143,7 @@ class Progressbar(object):
 
     """
 
-    backend = "pyprind"
+    backend = "tqdm"
 
     def __new__(
         cls,
