@@ -105,7 +105,8 @@ def cube_inject_fakedisk(
                 "cube_inject_fakedisk accepts ndarray, int or "
                 "float.")
 
-        fakedisk_cube = fftconvolve(fakedisk_cube, psf, mode="same")
+        for i in range(nframes):
+            fakedisk_cube[i, :, :] = fftconvolve(fakedisk_cube[i, :, :], psf, mode="same")
 
     return fakedisk_cube
 
