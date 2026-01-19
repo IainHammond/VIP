@@ -97,7 +97,7 @@ def test_algos(
         angs=ds.angles,
         psfn=ds.psf,
         ncomp=ncomp,
-        planets_xy_coord=np.array([[yx[1], yx[0]]]),
+        planets_xy_coord=np.array([[float(yx[1]), float(yx[0])]]),
         fwhm=ds.fwhm,
         simplex=negfc_algo == firstguess,
         algo=pca_algo,
