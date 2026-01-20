@@ -69,7 +69,7 @@ def test_algos(injected_cube_position, pca_algo, negfc_algo, ncomp, mu_sigma, fm
         angs=ds.angles,
         psfn=ds.psf,
         ncomp=ncomp,
-        planets_xy_coord=np.array([[float(yx[1]), float(yx[0])]]),
+        planets_xy_coord=np.array([[yx[1], yx[0]]]),
         fwhm=fwhm_m,
         simplex=negfc_algo == firstguess,
         algo=pca_algo,
