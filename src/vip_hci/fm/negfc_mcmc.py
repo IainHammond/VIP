@@ -909,17 +909,17 @@ def mcmc_negfc_sampling(cube, angs, psfn, initial_state, algo=pca_annulus,
     if verbosity > 0:
         print('Beginning emcee Ensemble sampler...')
 
-    multiprocessing.set_start_method(method="spawn", force=True)
+    # multiprocessing.set_start_method(method="spawn", force=True)
     # deactivate multithreading
     os.environ["MKL_NUM_THREADS"] = "1"
     os.environ["NUMEXPR_NUM_THREADS"] = "1"
     os.environ["OMP_NUM_THREADS"] = "1"
 
-    # avail_methods = multiprocessing.get_all_start_methods()
-    # if "forkserver" in avail_methods:
-    #     multiprocessing.set_start_method("forkserver", force=True)  # faster, better
-    # else:
-    #     multiprocessing.set_start_method("spawn", force=True)  # slower, but available on all platforms
+    avail_methods = multiprocessing.get_all_start_methods()
+    if "fork" in avail_methods:
+        multiprocessing.set_start_method("fork", force=True)  # known to work
+    else:
+        multiprocessing.set_start_method("spawn", force=True)  # slower, but available on all platforms
 
     with multiprocessing.Pool(processes=nproc) as pool:
         sampler = emcee.EnsembleSampler(nwalkers, dim, lnprob,
