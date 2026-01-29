@@ -909,7 +909,6 @@ def mcmc_negfc_sampling(cube, angs, psfn, initial_state, algo=pca_annulus,
     if verbosity > 0:
         print('Beginning emcee Ensemble sampler...')
 
-    # multiprocessing.set_start_method(method="spawn", force=True)
     # deactivate multithreading
     os.environ["MKL_NUM_THREADS"] = "1"
     os.environ["NUMEXPR_NUM_THREADS"] = "1"
