@@ -404,7 +404,7 @@ def cube_correct_nan(cube, neighbor_box=3, min_neighbors=3, verbose=False,
             def _nan_corr_2d_mp(args):
                 nan_corr_2d_mp(*args)
 
-            context = multiprocessing.get_context("forkserver")
+            context = multiprocessing.get_context("fork")
             # processes argumnet is not provided to pool as no. of processes is
             # inferred from os.cpu_count()
             pool = context.Pool(processes=nproc, maxtasksperchild=1)

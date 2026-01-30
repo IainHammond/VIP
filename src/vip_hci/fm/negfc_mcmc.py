@@ -914,7 +914,7 @@ def mcmc_negfc_sampling(cube, angs, psfn, initial_state, algo=pca_annulus,
     os.environ["NUMEXPR_NUM_THREADS"] = "1"
     os.environ["OMP_NUM_THREADS"] = "1"
 
-    processing_method = multiprocessing.get_context(method="forkserver")
+    processing_method = multiprocessing.get_context(method="fork")
     with processing_method.Pool(processes=nproc) as pool:
         sampler = emcee.EnsembleSampler(nwalkers, dim, lnprob,
                                         pool=pool, moves=emcee.moves.StretchMove(a=a),

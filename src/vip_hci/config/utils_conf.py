@@ -494,7 +494,7 @@ def pool_map(nproc, fkt, *args, **kwargs):
         if verbose and msg is not None:
             print("{} with {} processes".format(msg, nproc))
 
-        processing_method = multiprocessing.get_context(method="forkserver")
+        processing_method = multiprocessing.get_context(method="fork")
         pool = processing_method.Pool(processes=nproc)
 
         if _generator:
