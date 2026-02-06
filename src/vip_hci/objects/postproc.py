@@ -547,6 +547,7 @@ class PostProc(BaseEstimator):
     def __getattr__(self, attr: str) -> NoReturn:
         """
         ``__getattr__`` is only called when an attribute does *not* exist.
+
         Catching this event allows us to output proper error messages when an
         attribute was not calculated yet.
         """
