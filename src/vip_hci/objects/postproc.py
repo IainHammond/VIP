@@ -544,24 +544,20 @@ class PostProc(BaseEstimator):
             except AttributeError:
                 pass  # attribute/result was not calculated yet. Skip.
 
-    def __getattr__(self, name):
+    def __getattr__(self, attr: str) -> NoReturn:
         """
         ``__getattr__`` is only called when an attribute does *not* exist.
-
         Catching this event allows us to output proper error messages when an
         attribute was not calculated yet.
         """
-        if name.startswith('_') or name in ('_get_calculations', '_calculations_cache'):
-            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
-        # Check if this is a calculated property
         calculations = self._get_calculations()
-
-        if name in calculations:
-            # Return the calculated value
-            return calculations[name]
-
-        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+        if attr in calculations:
+            msg = f"The {attr} was not calculated yet. "
+            msg += f"Call {calculations[attr]} first."
+            raise AttributeError(msg)
+        # this raises a regular AttributeError:
+        return self.__getattribute__(attr)
 
     def _show_attribute_help(self, function_name: Callable) -> None:
         """
