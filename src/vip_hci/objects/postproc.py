@@ -551,7 +551,6 @@ class PostProc(BaseEstimator):
         Catching this event allows us to output proper error messages when an
         attribute was not calculated yet.
         """
-
         calculations = self._get_calculations()
         if attr in calculations:
             msg = f"The {attr} was not calculated yet. "
