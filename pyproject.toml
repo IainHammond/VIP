@@ -26,7 +26,11 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Topic :: Scientific/Engineering :: Astronomy",
 ]
-urls.Homepage = "https://github.com/vortex-exoplanet/VIP"
+
+[project.urls]
+Homepage = "https://github.com/vortex-exoplanet/VIP"
+Issues = "https://github.com/vortex-exoplanet/VIP/issues"
+
 dependencies = [
     "astropy>=5.0.0",
     "corner>=2.2.1",
@@ -67,3 +71,12 @@ dev = [
     "sphinx_rtd_theme",
     "jupyter_sphinx",
 ]
+
+[tool.setuptools]
+editable-mode = "compat"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vip_hci = ["py.typed"]
