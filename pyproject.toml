@@ -71,9 +71,6 @@ dev = [
     "jupyter_sphinx",
 ]
 
-[tool.setuptools]
-editable-mode = "compat"
-
 [tool.setuptools.packages.find]
 where = ["src"]
 
