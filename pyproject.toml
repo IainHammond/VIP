@@ -75,4 +75,4 @@ dev = [
 where = ["src"]
 
 [tool.setuptools.package-data]
-vip_hci = ["py.typed"]
+"vip_hci" = ["py.typed"]
